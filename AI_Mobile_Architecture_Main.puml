@@ -1,0 +1,91 @@
+@startuml AI_Mobile_Architecture_Main
+!define RECTANGLE class
+
+skinparam backgroundColor #1a1f3a
+skinparam defaultFontColor white
+skinparam defaultFontSize 12
+skinparam roundcorner 15
+skinparam shadowing false
+
+skinparam rectangle {
+    BackgroundColor #2d3561
+    BorderColor #4dabf7
+    FontColor white
+}
+
+skinparam package {
+    BackgroundColor #252b4a
+    BorderColor #4dabf7
+    FontColor white
+}
+
+title AI-First Mobile App Architecture
+
+package "Cloud Services" <<Cloud>> #2d3561 {
+    package "AI Services" #3d4574 {
+        rectangle "Machine Learning Models" as MLModels
+        rectangle "NLP Processing" as NLP
+    }
+    
+    package "Backend Services" #3d4574 {
+        rectangle "API Gateway" as APIGateway
+        rectangle "Data Processing" as DataProc
+    }
+    
+    package "Cloud Storage" #3d4574 {
+        rectangle "User Data" as UserData
+        rectangle "AI Model Storage" as ModelStorage
+    }
+}
+
+package "Mobile Application" <<Mobile>> #2d3561 {
+    package "App Core Components" #3d4574 {
+        rectangle "AI Integration\n- On-device ML\n- AI Capabilities" as AIIntegration
+        rectangle "State\n- Management\n- Data Flow" as State
+        rectangle "API\n- Integration\n- Cloud Sync" as API
+        rectangle "Security\n- Encryption\n- Authentication" as Security
+    }
+    
+    package "User Interface Layer" #3d4574 {
+        rectangle "Intelligent UI\n- Adaptive Interfaces\n- Personalization\n- Context Awareness" as IntelligentUI
+        rectangle "User Experience\n- Voice Interactions\n- Visual Recognition\n- Predictive Features" as UX
+        rectangle "On-device AI Processing\n- TensorFlow Lite / Core ML\n- Edge Inference Engine" as OnDeviceAI
+    }
+}
+
+actor "User" as User
+cloud "Cloud Infrastructure" as CloudInfra
+database "Storage Systems" as Storage
+
+User --> IntelligentUI
+User --> UX
+
+MLModels ..> AIIntegration : ML Models
+APIGateway ..> API : Data & Services
+DataProc ..> State : Processing
+UserData ..> API : Sync Data
+ModelStorage ..> AIIntegration : Model Files
+
+AIIntegration --> IntelligentUI : Powers
+AIIntegration --> OnDeviceAI : Enables
+State --> IntelligentUI : State Updates
+API --> IntelligentUI : Data
+Security --> API : Secures
+
+OnDeviceAI --> IntelligentUI : AI Features
+OnDeviceAI --> UX : AI Features
+
+CloudInfra .up.> "Cloud Services"
+Storage .up.> "Cloud Storage"
+
+note right of "Cloud Services"
+  Cloud-based AI and
+  Backend Services
+end note
+
+note left of "Mobile Application"
+  Modernizing mobile development
+  with artificial intelligence
+end note
+
+@enduml
