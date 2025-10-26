@@ -1,3 +1,4 @@
+```mermaid
 ---
 config:
   layout: dagre
@@ -43,3 +44,5 @@ flowchart TB
     L_AI_AIInt_0@{ animation: none } 
     L_Backend_Core_0@{ animation: none } 
     L_Storage_APIInt_0@{ animation: none }
+    
+```
